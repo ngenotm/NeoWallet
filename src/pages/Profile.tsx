@@ -1,3 +1,4 @@
+
 import { Card } from "@/components/ui/card";
 import { User, Mail, Phone, MapPin } from "lucide-react";
 
@@ -26,7 +27,7 @@ const Profile = () => {
               <User className="h-5 w-5 text-muted-foreground" />
               <div>
                 <p className="text-sm text-muted-foreground">Full Name</p>
-                <p className="font-medium">John Doe</p>
+                <p className="font-medium">Yashwanth</p>
               </div>
             </div>
             
@@ -34,7 +35,7 @@ const Profile = () => {
               <Mail className="h-5 w-5 text-muted-foreground" />
               <div>
                 <p className="text-sm text-muted-foreground">Email</p>
-                <p className="font-medium">john.doe@example.com</p>
+                <p className="font-medium">abcd@gmail.com</p>
               </div>
             </div>
             
@@ -42,7 +43,7 @@ const Profile = () => {
               <Phone className="h-5 w-5 text-muted-foreground" />
               <div>
                 <p className="text-sm text-muted-foreground">Phone</p>
-                <p className="font-medium">+1 (555) 123-4567</p>
+                <p className="font-medium">910 234 9687</p>
               </div>
             </div>
             
@@ -50,7 +51,7 @@ const Profile = () => {
               <MapPin className="h-5 w-5 text-muted-foreground" />
               <div>
                 <p className="text-sm text-muted-foreground">Location</p>
-                <p className="font-medium">San Francisco, CA</p>
+                <p className="font-medium">India</p>
               </div>
             </div>
           </div>
