@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,6 +11,7 @@ import Transactions from "./pages/Transactions";
 import Notifications from "./pages/Notifications";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import SendMoney from "./pages/Send";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +32,7 @@ const App = () => (
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/send" element={<SendMoney />} />
               </Routes>
             </div>
           </main>
