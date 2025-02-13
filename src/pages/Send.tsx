@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { QrCode, Send, User, Wallet, CreditCard, CheckCircle2 } from "lucide-react";
+import { QrCode, Send, User, Wallet, CreditCard, CheckCircle2, Scan } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import QRScanner from "@/components/QRScanner";
 
 // Mock user data for testing
 const mockRecipients = [
@@ -29,6 +29,33 @@ const SendMoney = () => {
   const [note, setNote] = useState("");
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(paymentMethods[0].id);
   const [pin, setPin] = useState("");
+  const [isQRScannerOpen, setIsQRScannerOpen] = useState(false);
+
+  const handleScan = (result: string) => {
+    try {
+      const scannedData = JSON.parse(result);
+      const recipient = mockRecipients.find(r => r.walletId === scannedData.walletId);
+      if (recipient) {
+        setSelectedRecipient(recipient);
+        if (scannedData.amount) {
+          setAmount(scannedData.amount.toString());
+        }
+        setStep(2);
+      } else {
+        toast({
+          title: "Invalid QR Code",
+          description: "Recipient not found",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Invalid QR Code",
+        description: "Could not process QR code data",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleSend = () => {
     if (!amount || !selectedRecipient || !selectedPaymentMethod) {
@@ -65,10 +92,24 @@ const SendMoney = () => {
 
   return (
     <div className="space-y-8">
-      <header>
-        <h1 className="text-4xl font-bold text-primary">Send Money</h1>
-        <p className="text-secondary-foreground">Transfer money to other NeoWallet users</p>
+      <header className="flex justify-between items-center">
+        <div>
+          <h1 className="text-4xl font-bold text-primary">Send Money</h1>
+          <p className="text-secondary-foreground">Transfer money to other NeoWallet users</p>
+        </div>
+        <button
+          onClick={() => setIsQRScannerOpen(true)}
+          className="glass-card p-3 rounded-lg hover:bg-white/10 transition-colors"
+        >
+          <Scan className="h-6 w-6 text-purple-500" />
+        </button>
       </header>
+
+      <QRScanner
+        isOpen={isQRScannerOpen}
+        onClose={() => setIsQRScannerOpen(false)}
+        onScan={handleScan}
+      />
 
       <Card className="glass-card p-6 max-w-2xl mx-auto">
         {/* Progress Steps */}

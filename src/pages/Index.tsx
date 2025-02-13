@@ -1,7 +1,10 @@
-
 import { Card } from "@/components/ui/card";
-import { DollarSign, PieChart, ArrowUpRight, ArrowDownRight, Send, Download, Users, Wallet } from "lucide-react";
+import { DollarSign, PieChart, ArrowUpRight, ArrowDownRight, Send, Download, Users, Wallet, Scan } from "lucide-react";
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
+import { useState } from "react";
+import QRScanner from "@/components/QRScanner";
+import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const data = [
   { name: "Jan", value: 24000 },
@@ -13,6 +16,23 @@ const data = [
 ];
 
 const Index = () => {
+  const [isQRScannerOpen, setIsQRScannerOpen] = useState(false);
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const handleScan = (result: string) => {
+    try {
+      const scannedData = JSON.parse(result);
+      navigate('/send', { state: { scannedData } });
+    } catch (error) {
+      toast({
+        title: "Invalid QR Code",
+        description: "Could not process QR code data",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="space-y-8">
       <header className="flex justify-between items-center">
@@ -21,6 +41,12 @@ const Index = () => {
           <p className="text-gray-400">Manage your digital wallet and payments</p>
         </div>
         <div className="flex items-center space-x-4">
+          <button
+            onClick={() => setIsQRScannerOpen(true)}
+            className="glass-card px-4 py-2 rounded-lg hover-scale text-white"
+          >
+            <Scan className="h-5 w-5" />
+          </button>
           <button className="glass-card px-4 py-2 rounded-lg hover-scale text-white">
             <Send className="h-5 w-5" />
           </button>
@@ -29,6 +55,12 @@ const Index = () => {
           </button>
         </div>
       </header>
+
+      <QRScanner
+        isOpen={isQRScannerOpen}
+        onClose={() => setIsQRScannerOpen(false)}
+        onScan={handleScan}
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card className="glass-card p-6">
