@@ -1,11 +1,10 @@
-
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { 
   CreditCard, 
-  BuildingBank, 
+  Building, 
   Send, 
   Receipt, 
   Calendar, 
@@ -131,7 +130,7 @@ const Banking = () => {
               <div key={bank.id} className="p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center space-x-3">
-                    <BuildingBank className="h-5 w-5 text-purple-400" />
+                    <Building className="h-5 w-5 text-purple-400" />
                     <div>
                       <h4 className="font-medium text-white">{bank.name}</h4>
                       <p className="text-sm text-gray-400">{bank.accountNumber}</p>
