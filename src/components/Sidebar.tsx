@@ -1,5 +1,5 @@
 
-import { Home, PieChart, Settings, User, CreditCard, Bell, Send, Download, Users, Wallet } from "lucide-react";
+import { Home, PieChart, Settings, User, CreditCard, Bell, Send, Download, Users, Wallet, BuildingBank } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
 
@@ -7,6 +7,7 @@ const menuItems = [
   { icon: Home, label: "Dashboard", path: "/" },
   { icon: PieChart, label: "Analytics", path: "/analytics" },
   { icon: CreditCard, label: "Transactions", path: "/transactions" },
+  { icon: BuildingBank, label: "Banking", path: "/banking" },
   { icon: Send, label: "Send Money", path: "/send" },
   { icon: Download, label: "Receive", path: "/receive" },
   { icon: Users, label: "Split Bills", path: "/split" },
